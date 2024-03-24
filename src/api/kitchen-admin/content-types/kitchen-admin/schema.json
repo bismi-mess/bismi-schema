@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "kitchen_admins",
+  "info": {
+    "singularName": "kitchen-admin",
+    "pluralName": "kitchen-admins",
+    "displayName": "kitchen_admin"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "food_items_lunch": {
+      "type": "string",
+      "required": true
+    },
+    "food_items_breakfast": {
+      "type": "string",
+      "required": true
+    },
+    "food_items_dinner": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

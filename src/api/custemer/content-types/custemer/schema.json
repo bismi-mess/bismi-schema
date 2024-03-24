@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "custemers",
+  "info": {
+    "singularName": "custemer",
+    "pluralName": "custemers",
+    "displayName": "customer",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "customer_name": {
+      "type": "string",
+      "required": true
+    },
+    "phone_number": {
+      "type": "string",
+      "required": true
+    },
+    "customer_address": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
