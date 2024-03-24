@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "food_items",
+  "info": {
+    "singularName": "food-item",
+    "pluralName": "food-items",
+    "displayName": "food_item"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "food_type": {
+      "type": "enumeration",
+      "enum": [
+        "Breakfast",
+        "Launch",
+        "Dinner"
+      ]
+    }
+  }
+}

@@ -23,6 +23,15 @@
     "customer_address": {
       "type": "string",
       "required": true
+    },
+    "location": {
+      "type": "json"
+    },
+    "delivery_item": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::delivery-item.delivery-item",
+      "inversedBy": "customers"
     }
   }
 }

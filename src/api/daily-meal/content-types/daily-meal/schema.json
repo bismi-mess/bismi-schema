@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "daily_meals",
+  "info": {
+    "singularName": "daily-meal",
+    "pluralName": "daily-meals",
+    "displayName": "daily_meal"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "food_items": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::food-item.food-item"
+    },
+    "meal_status": {
+      "type": "enumeration",
+      "enum": [
+        "Pending",
+        "Packed",
+        "Pickup",
+        "Delivery"
+      ]
+    },
+    "createdDate": {
+      "type": "datetime"
+    },
+    "DeliveryDate": {
+      "type": "datetime"
+    }
+  }
+}

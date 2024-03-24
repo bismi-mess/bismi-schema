@@ -362,71 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiCustemerCustemer extends Schema.CollectionType {
-  collectionName: 'custemers';
-  info: {
-    singularName: 'custemer';
-    pluralName: 'custemers';
-    displayName: 'customer';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    customer_name: Attribute.String & Attribute.Required;
-    phone_number: Attribute.String & Attribute.Required;
-    customer_address: Attribute.String & Attribute.Required;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::custemer.custemer',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::custemer.custemer',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiKitchenAdminKitchenAdmin extends Schema.CollectionType {
-  collectionName: 'kitchen_admins';
-  info: {
-    singularName: 'kitchen-admin';
-    pluralName: 'kitchen-admins';
-    displayName: 'kitchen_admin';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    food_items_lunch: Attribute.String & Attribute.Required;
-    food_items_breakfast: Attribute.String & Attribute.Required;
-    food_items_dinner: Attribute.String & Attribute.Required;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::kitchen-admin.kitchen-admin',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::kitchen-admin.kitchen-admin',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -853,6 +788,191 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiCustemerCustemer extends Schema.CollectionType {
+  collectionName: 'custemers';
+  info: {
+    singularName: 'custemer';
+    pluralName: 'custemers';
+    displayName: 'customer';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    customer_name: Attribute.String & Attribute.Required;
+    phone_number: Attribute.String & Attribute.Required;
+    customer_address: Attribute.String & Attribute.Required;
+    location: Attribute.JSON;
+    delivery_item: Attribute.Relation<
+      'api::custemer.custemer',
+      'manyToOne',
+      'api::delivery-item.delivery-item'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::custemer.custemer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::custemer.custemer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiDailyMealDailyMeal extends Schema.CollectionType {
+  collectionName: 'daily_meals';
+  info: {
+    singularName: 'daily-meal';
+    pluralName: 'daily-meals';
+    displayName: 'daily_meal';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    food_items: Attribute.Relation<
+      'api::daily-meal.daily-meal',
+      'oneToOne',
+      'api::food-item.food-item'
+    >;
+    meal_status: Attribute.Enumeration<
+      ['Pending', 'Packed', 'Pickup', 'Delivery']
+    >;
+    createdDate: Attribute.DateTime;
+    DeliveryDate: Attribute.DateTime;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::daily-meal.daily-meal',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::daily-meal.daily-meal',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiDeliveryItemDeliveryItem extends Schema.CollectionType {
+  collectionName: 'delivery_items';
+  info: {
+    singularName: 'delivery-item';
+    pluralName: 'delivery-items';
+    displayName: 'delivery_item';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    customers: Attribute.Relation<
+      'api::delivery-item.delivery-item',
+      'oneToMany',
+      'api::custemer.custemer'
+    >;
+    daily_meal: Attribute.Relation<
+      'api::delivery-item.delivery-item',
+      'oneToOne',
+      'api::daily-meal.daily-meal'
+    >;
+    admin_user: Attribute.Relation<
+      'api::delivery-item.delivery-item',
+      'oneToOne',
+      'admin::user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::delivery-item.delivery-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::delivery-item.delivery-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiFoodItemFoodItem extends Schema.CollectionType {
+  collectionName: 'food_items';
+  info: {
+    singularName: 'food-item';
+    pluralName: 'food-items';
+    displayName: 'food_item';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    food_type: Attribute.Enumeration<['Breakfast', 'Launch', 'Dinner']>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::food-item.food-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::food-item.food-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiKitchenAdminKitchenAdmin extends Schema.CollectionType {
+  collectionName: 'kitchen_admins';
+  info: {
+    singularName: 'kitchen-admin';
+    pluralName: 'kitchen-admins';
+    displayName: 'kitchen_admin';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    food_items_lunch: Attribute.String & Attribute.Required;
+    food_items_breakfast: Attribute.String & Attribute.Required;
+    food_items_dinner: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::kitchen-admin.kitchen-admin',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::kitchen-admin.kitchen-admin',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -863,8 +983,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::custemer.custemer': ApiCustemerCustemer;
-      'api::kitchen-admin.kitchen-admin': ApiKitchenAdminKitchenAdmin;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -873,6 +991,11 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::custemer.custemer': ApiCustemerCustemer;
+      'api::daily-meal.daily-meal': ApiDailyMealDailyMeal;
+      'api::delivery-item.delivery-item': ApiDeliveryItemDeliveryItem;
+      'api::food-item.food-item': ApiFoodItemFoodItem;
+      'api::kitchen-admin.kitchen-admin': ApiKitchenAdminKitchenAdmin;
     }
   }
 }

@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "delivery_items",
+  "info": {
+    "singularName": "delivery-item",
+    "pluralName": "delivery-items",
+    "displayName": "delivery_item"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "customers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::custemer.custemer",
+      "mappedBy": "delivery_item"
+    },
+    "daily_meal": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::daily-meal.daily-meal"
+    },
+    "admin_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "admin::user"
+    }
+  }
+}
